@@ -7,7 +7,7 @@ import { checkAuth } from './redux/authSlice';
 import CheckAuthentication from '../src/components/Auth/CheckAuth';
 
 // Dashboards
-import StudentDashboard from './pages/Dashboard/studentDashboard';
+import StudentDashboard from './pages/Dashboard/StudentDashboard';
 import AdminDashboard from './pages/Dashboard/AdminDashboard';
 
 // Election & Voting
