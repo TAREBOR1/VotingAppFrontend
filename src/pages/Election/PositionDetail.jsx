@@ -136,7 +136,6 @@ const PositionDetail = () => {
             >
               Back to Election
             </Button>
-          
           </div>
         </div>
       </div>
@@ -163,12 +162,11 @@ const PositionDetail = () => {
                     />
                     {isVoted && (
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                        Your Vote
+                        Voted
                       </div>
                     )}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 text-center">{candidate.name}</h3>
-                 
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-center">
                   <span className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -187,6 +185,7 @@ const PositionDetail = () => {
         onClose={() => setSelectedCandidate(null)}
         onVote={() => handleCastVote(selectedCandidate?._id)}
         canVote={!positionDetail.hasVoted}
+        votedCandidateId={votedCandidateId}
       />
     </motion.div>
   );
@@ -214,7 +213,6 @@ const DetailCard = ({ label, value, icon, status }) => {
   );
 };
 
-// Simple icon components (replace with actual icons if available)
 const CalendarIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

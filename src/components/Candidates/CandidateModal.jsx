@@ -2,55 +2,67 @@ import React from 'react';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 
-const CandidateModal = ({ candidate, isOpen, onClose, onVote, canVote }) => {
+const CandidateModal = ({ candidate, isOpen, onClose, onVote, canVote, votedCandidateId }) => {
   if (!candidate) return null;
 
+  const hasVotedForThisCandidate = votedCandidateId === candidate._id;
+  const firstName = candidate.name.split(' ')[0];
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Candidate Profile: ${candidate.name}`} size="lg">
-      <div className="flex flex-col items-center sm:flex-row sm:items-start gap-6 p-4">
-        <div className="flex flex-col items-center">
-          <div className="relative">
+    <Modal 
+      isOpen={isOpen} 
+      onClose={onClose} 
+      title={`Candidate Profile: ${candidate.name}`} 
+      size="lg"
+    >
+      <div className="flex flex-col items-center p-4 max-h-[70vh] overflow-y-auto">
+        {/* Candidate Profile Section */}
+        <div className="flex flex-col items-center mb-6 w-full">
+          <div className="relative mb-4">
             <img
-              className="w-36 h-36 rounded-full object-cover border-4 border-white shadow-lg"
+              className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-white shadow-md"
               src={candidate.image || '/default-avatar.png'}
               alt={`${candidate.name}'s profile`}
               onError={(e) => (e.target.src = '/default-avatar.png')}
             />
-            {!canVote && (
-              <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+            {hasVotedForThisCandidate && (
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                 Voted
               </div>
             )}
           </div>
-          <h3 className="mt-4 text-xl font-bold text-gray-900">{candidate.name}</h3>
+          <h3 className="text-xl font-bold text-gray-900 text-center">{candidate.name}</h3>
         </div>
 
-        <div className="flex-1 bg-gray-50 rounded-lg p-6">
-
-          {candidate.manifesto && (
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Manifesto</h4>
-              <div className="bg-white p-4 rounded-md border border-gray-200">
-                <p className="text-gray-700 whitespace-pre-line">{candidate.manifesto}</p>
-              </div>
+        {/* Manifesto Section */}
+        {candidate.manifesto && (
+          <div className="w-full bg-gray-50 rounded-lg p-4 mb-6">
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">Manifesto</h4>
+            <div className="bg-white p-4 rounded-md border border-gray-200 max-h-[200px] overflow-y-auto">
+              <p className="text-gray-700 whitespace-pre-line">{candidate.manifesto}</p>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
 
-      {canVote && (
-        <div className="mt-6 flex justify-center sm:justify-end space-x-3">
-          <Button variant="secondary" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button 
-            onClick={() => { onVote(); onClose(); }}
-            className="bg-indigo-600 hover:bg-indigo-700"
-          >
-            Vote for {candidate.name.split(' ')[0]}
-          </Button>
-        </div>
-      )}
+        {/* Action Buttons */}
+        {canVote && (
+          <div className="flex flex-col sm:flex-row justify-center gap-3 w-full mt-4">
+            <Button 
+              variant="secondary" 
+              onClick={onClose}
+              className="w-full sm:w-auto"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => { onVote(); onClose(); }}
+              className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700"
+            >
+              Vote for {firstName}
+            </Button>
+          </div>
+        )}
+      </div>
     </Modal>
   );
 };

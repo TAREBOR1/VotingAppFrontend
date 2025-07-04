@@ -20,17 +20,18 @@ const VoteConfirmation = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="min-h-screen flex flex-col items-center justify-center px-4 py-8"
     >
-      <div className="text-center mb-10">
+      <div className="w-full max-w-md mx-auto flex flex-col items-center">
+        {/* Centered Check Icon */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-          className="bg-green-100 rounded-full p-4 inline-flex items-center justify-center mb-6 shadow-lg"
+          className="bg-green-100 rounded-full p-4 flex items-center justify-center mb-6 shadow-lg"
         >
           <svg
-            className="h-16 w-16 text-green-600"
+            className="h-12 w-12 text-green-600"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -44,72 +45,78 @@ const VoteConfirmation = () => {
           </svg>
         </motion.div>
 
-        <motion.h1 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-3xl font-bold text-gray-900 mb-3"
-        >
-          Vote Submitted Successfully!
-        </motion.h1>
-        <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-lg text-gray-600"
-        >
-          Thank you for participating in the election
-        </motion.p>
-      </div>
-
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="bg-white rounded-xl shadow-lg overflow-hidden mb-10 border border-gray-100"
-      >
-        <div className="bg-gradient-to-r from-indigo-500 to-blue-600 p-4 text-center">
-          <h2 className="text-xl font-bold text-white">Your Vote Summary</h2>
+        {/* Centered Text Content */}
+        <div className="text-center w-full">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-2xl font-bold text-gray-900 mb-3"
+          >
+            Vote Submitted!
+          </motion.h1>
+          
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-gray-600 mb-8"
+          >
+            Thank you for participating in the election
+          </motion.p>
         </div>
-        <div className="p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="relative">
-              <img
-                className="h-24 w-24 rounded-full object-cover border-4 border-white shadow-md"
-                src={candidate.image}
-                alt={candidate.name}
-              />
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                Voted
+
+        {/* Vote Summary Card */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-xl shadow-md overflow-hidden mb-8 border border-gray-100 w-full"
+        >
+          <div className="bg-blue-600 p-4 text-center">
+            <h2 className="text-lg font-semibold text-white">Your Vote</h2>
+          </div>
+          
+          <div className="p-6">
+            <div className="flex flex-col items-center text-center">
+              <div className="relative mb-4">
+                <img
+                  className="h-20 w-20 rounded-full object-cover border-4 border-white shadow-md"
+                  src={candidate.image}
+                  alt={candidate.name}
+                />
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
+                  Voted
+                </div>
               </div>
-            </div>
-            <div className="text-center sm:text-left">
-              <h3 className="text-2xl font-bold text-gray-900">{candidate.name}</h3>
-              <p className="text-lg text-gray-600 mb-2">{candidate.positionTitle}</p>
-              <div className="bg-blue-50 rounded-lg px-4 py-2 inline-block">
-                <p className="text-blue-700 font-medium">
-                  You voted for {candidate.name} as {candidate.positionTitle}
+              
+              <h3 className="text-xl font-bold text-gray-900">{candidate.name}</h3>
+              <p className="text-gray-600 mb-4">{candidate.positionTitle}</p>
+              
+              <div className="bg-blue-50 rounded-lg px-3 py-2 w-full">
+                <p className="text-blue-700 font-medium text-sm">
+                  You voted for {candidate.name.split(' ')[0]} as {candidate.positionTitle}
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex flex-col sm:flex-row justify-center gap-4"
-      >
-        <Button
-          onClick={() => navigate('/student')}
-          variant="secondary"
-          className="w-full sm:w-auto px-8 py-3 text-lg"
+        {/* Centered Button */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="w-full flex justify-center"
         >
-          Back to Election
-        </Button>
-      </motion.div>
+          <Button
+            onClick={() => navigate('/student')}
+            className="w-full max-w-xs py-3"
+          >
+            Back to Election
+          </Button>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };
