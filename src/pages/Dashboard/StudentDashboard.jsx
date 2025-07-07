@@ -6,7 +6,7 @@ import { getAllPosition } from '../../redux/admin/positionSlice';
 import { getCandidate } from '../../redux/admin/candidateSlice';
 import { getVoteByStudent } from '../../redux/student/voteSlice';
 
-const ELECTION_END_TIME = new Date('2025-07-06T22:01:00');
+const ELECTION_END_TIME = new Date('2025-07-07T15:01:00');
 
 const StudentDashboard = () => {
   const dispatch = useDispatch();
